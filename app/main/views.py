@@ -3,8 +3,10 @@ from .. import db
 from ..models import User
 from . import main
 from .forms import NameForm
-
+from flask_login import login_required
 
 @main.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
-    pass
+    form = NameForm()
+    return render_template('index.html', form=form)
