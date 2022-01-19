@@ -1,0 +1,35 @@
+.node {
+    stroke: #84eeff;
+    stroke-width: 1.5px;
+}
+
+.node.person {
+    fill: #7e90fd;
+}
+
+.node.movie {
+    fill: #ce05ff;
+}
+
+.link {
+    stroke: #7cfa5b;
+    stroke-opacity: .6;
+    stroke-width: 1px;
+}
+
+.text{
+    font-size: x-small;
+    color: #3030ff;
+}
+
+.text.node{
+    font-size: xx-small;
+    color: #9600ff;
+}
+
+#graph{
+    width: 800px;
+    height: 520px;
+    margin: 10px;
+    background-color: #eefff8;
+}

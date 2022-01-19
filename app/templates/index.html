@@ -3,9 +3,18 @@
 
 {% block title %}人机协同系统{% endblock %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/index.css') }}" type="text/css"/>
+{% endblock %}
+
 {% block page_content %}
-<div class="page-header">
-    <h1>Hello, world!</h1>
-</div>
-<p><a href="{{ url_for('auth.logout') }}">退出</a></p>
+    <div id="graph"></div>
+
+    <p><a href="{{ url_for('auth.logout') }}">退出</a></p>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='javascript/d3.v5.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='javascript/index.js') }}" type="text/javascript"></script>
 {% endblock %}

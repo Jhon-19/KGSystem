@@ -4,12 +4,15 @@ from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from config import config
 from flask_login import LoginManager
+from py2neo import Graph
 
 bootstrap = Bootstrap()
 moment = Moment()
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
+
+graph = None
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -20,6 +23,13 @@ def create_app(config_name):
     db.init_app(app)
 
     login_manager.init_app(app)
+
+    # neo4j连接
+    global graph
+    url = config[config_name].NEO4J_URL
+    username = config[config_name].NEO4J_USER
+    password = config[config_name].NEO4J_PASSWORD
+    graph = Graph(url, auth=(username, password))
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
