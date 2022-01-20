@@ -1,3 +1,4 @@
+//绘图及显示属性
 const width = 800;
 const height = 500;
 
@@ -6,15 +7,17 @@ var svg = d3.select("#graph").append("svg")
     .attr("width", width).attr("height", height);
 var g = svg.append("g").attr("transform", "translate(" + margins.top + "," + margins.left + ")");
 
-var data;
-var link;
+// var data;
+// var link;
+
+var neo_id;
 
 d3.json("/graph").then(function (graph) {
     var g_nodes = graph.nodes;
     var g_links = graph.links;
 
-    data = g_nodes;
-    link = g_links;
+    // data = g_nodes;
+    // link = g_links;
 
     var forceSimulation = d3.forceSimulation(g_nodes)
         .force("charge", d3.forceManyBody())
@@ -36,10 +39,10 @@ d3.json("/graph").then(function (graph) {
         .append("svg:marker")
         .attr("id", "marker")
         .attr('viewBox', '0 -5 10 10')
-        .attr("refX", 20)
+        .attr("refX", 16)
         .attr("refY", 0)
-        .attr('markerWidth', 10)
-        .attr('markerHeight', 10)
+        .attr('markerWidth', 3)
+        .attr('markerHeight', 3)
         .attr('orient', 'auto')
         .append('svg:path')
         .attr('d', 'M0,-5L10,0L0,5')
@@ -51,10 +54,11 @@ d3.json("/graph").then(function (graph) {
         .enter()
         .append("line")
         .attr("class", "link")
-        .attr("marker-end", "url(#marker)");
+        .attr("marker-end", "url(#marker)")
+        .on("click", clicked_link);
 
     var linksText = g.append("g")
-        .selectAll("text")
+        .selectAll(".link_text")
         .data(g_links)
         .enter()
         .append("text")
@@ -74,10 +78,11 @@ d3.json("/graph").then(function (graph) {
             .on("start", started)
             .on("drag", dragged)
             .on("end", ended)
-        );
+        )
+        .on("click", clicked_node);
 
     var nodesText = g.append("g")
-        .selectAll("text")
+        .selectAll(".node_text")
         .data(g_nodes)
         .enter()
         .append("text")
@@ -87,6 +92,9 @@ d3.json("/graph").then(function (graph) {
         .attr("class", function (d) {
             return "text " + d.label;
         });
+
+    //加载用户更改
+    show_user_changes()
 
     function ticked() {
         links.attr("x1", function (d) {
@@ -135,4 +143,41 @@ d3.json("/graph").then(function (graph) {
         d.fx = null;
         d.fy = null;
     }
-})
+
+    function clicked_link(d) {
+        console.log('clicked');
+    }
+
+    function clicked_node(d) {
+        // alert(d.ID);
+        neo_id = d.ID;
+        $.ajax({
+            url: "/search",
+            data: {"neo_id": neo_id},
+            success: function (result) {
+                // console.log(result);
+
+                if (neo_id === result.n_ID) {
+                    $('#neo_id').text(neo_id);
+                    $('#neo_label').text(result.n_labels.join(', '))
+
+                    var details_table = $('#details_table');
+                    details_table.empty();
+                    thead = '<tr><td class="column_1">属性</td><td>属性值</td></tr>';
+                    details_table.append(thead);
+                    properties = result.n_properties;
+                    for (key in properties) {
+                        add_details_item(key, properties[key]);
+                    }
+
+                    show_changes_in_tables()
+                } else {
+                    console.log("error!")
+                }
+            }
+        })
+    }
+});
+
+confirm_change();
+

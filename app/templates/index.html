@@ -10,11 +10,47 @@
 {% block page_content %}
     <div id="graph"></div>
 
-    <p><a href="{{ url_for('auth.logout') }}">退出</a></p>
+    <div id="logout">{{ moment(current_time).fromNow(refresh=True) }}登录，点击<a href="{{ url_for('auth.logout') }}">退出</a>
+    </div>
+    <div class="user_panel">
+        <table id="label_table" class="user_table">
+            <tr>
+                <td class="column_1">ID</td>
+                <td id="neo_id"></td>
+            </tr>
+            <tr class="changeable">
+                <td>Label</td>
+                <td id="neo_label"></td>
+            </tr>
+        </table>
+        <table id="details_table" class="user_table">
+            <tr>
+                <td class="column_1">属性</td>
+                <td>属性值</td>
+            </tr>
+        </table>
+    </div>
+    <div id="change_panel" class="user_panel">
+        修改知识图谱
+        <table id="change_table" class="user_table">
+            <tr>
+                <td class="column_2">
+                    <input class="input_text" type="text" id="property"/>
+                </td>
+                <td>
+                    <input class="input_text" type="text" id="property_value"/>
+                </td>
+            </tr>
+        </table>
+        <div id="confirm_button" class="user_button">确认修改</div>
+        <div id="delete_button" class="user_button">删除节点</div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
     <script src="{{ url_for('static', filename='javascript/d3.v5.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='javascript/change.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='javascript/show_changes.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='javascript/index.js') }}" type="text/javascript"></script>
 {% endblock %}
