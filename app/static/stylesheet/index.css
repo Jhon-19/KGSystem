@@ -21,14 +21,22 @@
     stroke: #ff720c;
 }
 
-.text {
-    font-size: x-small;
-    color: #3030ff;
+.link_text {
+    font-size: xx-small;
+    stroke: #3030ff;
+    stroke-opacity: .6;
+    stroke-width: 0.5px;
 }
 
-.text.node {
-    font-size: xx-small;
-    color: #9600ff;
+.node_text {
+    font-size: x-small;
+    stroke: #9600ff; /*修改字体颜色*/
+    stroke-opacity: .6;
+    stroke-width: 0.5px;
+}
+
+.selected{
+    fill: #e01e1e !important;
 }
 
 #graph {
@@ -97,13 +105,14 @@
 .input_text {
     border-radius: 2px;
     border: 1px solid #d1fffc;
+    height: 20px;
 }
 
 .changeable {
     cursor: default;
 }
 
-.changeable:hover{
+.changeable:hover {
     background-color: #00ff06;
 }
 
@@ -123,4 +132,9 @@
 
 .text {
     cursor: default;
+}
+
+#query_panel {
+    text-align: center;
+    height: 70px;
 }

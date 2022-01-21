@@ -43,14 +43,25 @@
             </tr>
         </table>
         <div id="confirm_button" class="user_button">确认修改</div>
-        <div id="delete_button" class="user_button">删除节点</div>
+        <div id="add_node_button" class="user_button">添加节点</div>
+        <div id="delete_node_button" class="user_button">删除节点</div>
+        <div id="add_link_button" class="user_button">添加关系</div>
+        <div id="delete_link_button" class="user_button">删除关系</div>
+    </div>
+    <div id="query_panel" class="user_panel">
+        查询节点<br/>
+        <input class="input_text" id="query_node_name" type="text"/>
+        <div id="confirm_query" class="user_button">查询</div>
+        <div id="clear_graph" class="user_button">清空图谱</div>
     </div>
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
     <script src="{{ url_for('static', filename='javascript/d3.v5.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='javascript/graph_utils.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='javascript/change.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='javascript/show_changes.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='javascript/query.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='javascript/index.js') }}" type="text/javascript"></script>
 {% endblock %}

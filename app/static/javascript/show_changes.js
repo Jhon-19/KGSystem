@@ -1,16 +1,16 @@
 //用来修改图上的文本，修改查询的属性值
-
 var changes_list;
 
 function show_user_changes() {
     $.ajax({
         url: '/user/query_changes',
-        success: function (result) {
+        success: result => {
             // console.log(result);
             changes_list = result;
             show_changes_in_graph()
         }
     })
+    is_cleared = false;
 }
 
 function show_changes_in_graph() {

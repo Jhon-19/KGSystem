@@ -28,8 +28,8 @@ class User(db.Model, UserMixin):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class UserChange(db.Model):
-    __tablename__ = 'user_changes'
+class UserNodeChange(db.Model):
+    __tablename__ = 'user_node_changes'
     id = db.Column(db.Integer, primary_key=True)
     neo_id = db.Column(db.Integer, nullable=False)
     time = db.Column(db.BIGINT)
@@ -40,16 +40,18 @@ class UserChange(db.Model):
     def __repr__(self):
         return '<User %s, Neo_Id %r>' % (self.username, self.neo_id)
 
-# class Link(db.Model):
-#     __tablename__ = 'links'
-#     id = db.Column(db.Integer, primary_key=True)
-#     time = db.Column(db.Integer)
-#     user = db.Column(db.String(20), nullable=True)
-#     # start_node = db.Column(db.String(40), nullable=False)
-#     # end_node = db.Column(db.String(40), nullable=False)
-#     # type = db.Column(db.String(20))
-#     link_property = db.Column(db.String(10), nullable=False)
-#     link_property_value = db.Column(db.String(255), nullable=False)
-#
-#     def __repr__(self):
-#         return '<User %s, LinkType %r>' % (self.user, self.type)
+class UserLinkChange(db.Model):
+    __tablename__ = 'user_link_changes'
+    id = db.Column(db.Integer, primary_key=True)
+    neo_id = db.Column(db.Integer, nullable=False)
+    time = db.Column(db.BIGINT)
+    start_node = db.Column(db.Integer, nullable=False)
+    end_node = db.Column(db.Integer, nullable=False)
+    username = db.Column(db.String(20), nullable=False)
+    property = db.Column(db.String(10), nullable=False)
+    property_value = db.Column(db.String(255), nullable=False)
+
+    def __repr__(self):
+        return '<User %s, Neo_Id %r, StartNode %s, EndNode %s>' \
+               % (self.username, self.neo_id, self.start_node, self.end_node)
+
