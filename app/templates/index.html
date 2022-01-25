@@ -5,6 +5,9 @@
 
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/index.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/graph.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/details.css') }}" type="text/css"/>
+
 {% endblock %}
 
 {% block page_content %}
@@ -19,7 +22,7 @@
                 <td id="neo_id"></td>
             </tr>
             <tr class="changeable">
-                <td>Label</td>
+                <td id="label_or_type">Label</td>
                 <td id="neo_label"></td>
             </tr>
         </table>
@@ -43,9 +46,7 @@
             </tr>
         </table>
         <div id="confirm_button" class="user_button">确认修改</div>
-        <div id="add_node_button" class="user_button">添加节点</div>
         <div id="delete_node_button" class="user_button">删除节点</div>
-        <div id="add_link_button" class="user_button">添加关系</div>
         <div id="delete_link_button" class="user_button">删除关系</div>
     </div>
     <div id="query_panel" class="user_panel">
@@ -54,13 +55,49 @@
         <div id="confirm_query" class="user_button">查询</div>
         <div id="clear_graph" class="user_button">清空图谱</div>
     </div>
+    <div id="add_panel" class="user_panel">
+        <div id="add_node_button" class="user_button">添加节点</div>
+        <div id="add_link_button" class="user_button">添加关系</div>
+    </div>
+
+    {#    添加节点#}
+    <div class="add_node_link_panel">
+        <label class="close_panel_label">x</label>
+        <label>实体信息:</label><br/><br />
+        <label>ID: </label><label id="node_details_ID">0</label><br/>
+        <label for="node_details_Label">Label:</label>
+        <input id="node_details_Label" type="text" class="input_text add_panel_input"/><br/>
+        <label for="node_details_title">title:</label>
+        <input id="node_details_title" type="text" class="input_text add_panel_input"/><br/>
+
+        <div id="node_details_confirm" class="user_button add_panel_confirm">确定</div>
+    </div>
+    {#    添加边#}
+    <div class="add_node_link_panel">
+        <label class="close_panel_label">x</label>
+        <label>关系信息:</label><br/><br />
+        <label>ID: </label><label id="link_details_ID">0</label><br/>
+        <label for="link_details_Type">Type:</label>
+        <input id="link_details_Type" type="text" class="input_text add_panel_input"/><br/>
+        <label for="link_details_source">start_node_ID:</label>
+        <input id="link_details_source" type="text" class="input_text add_panel_input"/><br/>
+        <label for="link_details_target">end_node_ID:</label>
+        <input id="link_details_target" type="text" class="input_text add_panel_input"/>
+        <br/>
+        <label id="link_details_hint">*ID必须为整数<br /></label>
+
+        <div id="link_details_confirm" class="user_button add_panel_confirm">确定</div>
+    </div>
+    {# 遮挡背景 #}
+    <div id="mask"></div>
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
     <script src="{{ url_for('static', filename='javascript/d3.v5.min.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='javascript/graph_utils.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for('static', filename='javascript/change.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='javascript/change_properties.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='javascript/update_node_link.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='javascript/show_changes.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='javascript/query.js') }}" type="text/javascript"></script>
     <script src="{{ url_for('static', filename='javascript/index.js') }}" type="text/javascript"></script>

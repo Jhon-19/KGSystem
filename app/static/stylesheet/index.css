@@ -1,55 +1,3 @@
-.node {
-    stroke: #84eeff;
-    stroke-width: 1.5px;
-}
-
-.node.person {
-    fill: #7e90fd;
-}
-
-.node.movie {
-    fill: #ce05ff;
-}
-
-.link {
-    stroke: #7cfa5b;
-    stroke-opacity: .6;
-    stroke-width: 5px;
-}
-
-.link:hover {
-    stroke: #ff720c;
-}
-
-.link_text {
-    font-size: xx-small;
-    stroke: #3030ff;
-    stroke-opacity: .6;
-    stroke-width: 0.5px;
-}
-
-.node_text {
-    font-size: x-small;
-    stroke: #9600ff; /*修改字体颜色*/
-    stroke-opacity: .6;
-    stroke-width: 0.5px;
-}
-
-.selected{
-    fill: #e01e1e !important;
-}
-
-#graph {
-    width: 800px;
-    height: 520px;
-    margin: 10px;
-    padding: 2px;
-    background-color: #eefff8;
-    float: left;
-    border: 2px solid #eefff8;
-    border-radius: 5px;
-}
-
 #logout {
     padding: 10px 20px;
     display: inline-block;
@@ -69,72 +17,49 @@
     overflow: auto;
 }
 
-#details_table td {
-    border: 1px solid #5325ff;
-    text-align: center;
-}
-
-.user_table {
-    width: 100%;
-    padding: 5px;
-    border-spacing: 0;
-}
-
-#label_table td {
-    border: 1px solid #42ecff;
-    text-align: center;
-}
-
-.column_1 {
-    width: 30%;
-}
-
-#change_panel {
-    text-align: center;
-    height: 100px;
-}
-
-#change_table td {
-    border: 1px solid #7d23ff;
-}
-
-.column_2 {
-    width: 50%;
-}
-
-.input_text {
-    border-radius: 2px;
-    border: 1px solid #d1fffc;
-    height: 20px;
-}
-
-.changeable {
-    cursor: default;
-}
-
-.changeable:hover {
-    background-color: #00ff06;
-}
-
-.user_button {
-    margin: 5px;
-    background-color: #43fffc;
-    display: inline-block;
-    padding: 5px;
-    border-radius: 3px;
-    border: 1px solid #e8f5f5;
-}
-
-.user_button:hover {
-    cursor: default;
-    background-color: #35cbc6;
-}
-
-.text {
-    cursor: default;
-}
-
 #query_panel {
     text-align: center;
     height: 70px;
+}
+
+#add_panel {
+    text-align: center;
+    height: 45px;
+}
+
+.disable_click {
+    pointer-events: none;
+}
+
+.add_node_link_panel {
+    display: none;
+    position: absolute;
+    top: 29%;
+    left: 38%;
+    width: 24%;
+    height: 42%;
+    padding: 20px;
+    border: 3px solid #99ffe0;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 2;
+    overflow: auto;
+}
+
+#mask {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(178, 174, 174, 0.3);
+    z-index: 1;
+    -moz-opacity: 0.8;
+    opacity: .80;
+    filter: alpha(opacity=88);
+}
+
+.add_panel_confirm{
+    margin-left: 20px;
 }

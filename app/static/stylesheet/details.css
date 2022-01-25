@@ -1,0 +1,94 @@
+#details_table td {
+    border: 1px solid #5325ff;
+    text-align: center;
+}
+
+.user_table {
+    width: 100%;
+    padding: 5px;
+    border-spacing: 0;
+}
+
+#label_table td {
+    border: 1px solid #42ecff;
+    text-align: center;
+}
+
+.column_1 {
+    width: 30%;
+}
+
+#change_panel {
+    text-align: center;
+    height: 105px;
+}
+
+#change_table td {
+    border: 1px solid #7d23ff;
+}
+
+.column_2 {
+    width: 50%;
+}
+
+.input_text {
+    border-radius: 2px;
+    border: 1px solid #d1fffc;
+    height: 20px;
+}
+
+.changeable {
+    cursor: default;
+}
+
+.changeable:hover {
+    background-color: #00ff06;
+}
+
+.user_button {
+    margin: 5px;
+    background-color: #43fffc;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #e8f5f5;
+}
+
+.user_button:hover {
+    cursor: default;
+    background-color: #35cbc6;
+}
+.link_text {
+    cursor: default;
+}
+
+.node_text {
+    cursor: default;
+}
+
+.close_panel_label {
+    position: absolute;
+    top: 2px;
+    left: 95%;
+    font-size: 25px;
+}
+
+.close_panel_label:hover {
+    cursor: pointer;
+    color: rgb(255, 17, 17);
+}
+
+.add_panel_input{
+    margin: 10px;
+    border: 1px solid #9be0e0;
+}
+
+.add_panel_confirm{
+    margin-left: 40%;
+}
+
+#link_details_hint{
+    display: none;
+    color: #ff002a;
+    font-size: x-small;
+}

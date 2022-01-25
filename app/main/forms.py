@@ -1,8 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField
 from wtforms.validators import DataRequired
 
-class ChangeForm(FlaskForm):
-    property = StringField("属性", validators=[DataRequired()])
-    property_value = StringField("属性值")
+class NodeForm(FlaskForm):
+    ID = StringField('ID', validators=[DataRequired()])
+    Label = StringField("Label")
+    title = StringField("title")
 
+class LinkForm(FlaskForm):
+    ID = StringField('ID', validators=[DataRequired()])
+    Type = StringField("Type")
+    source = StringField("source_node", validators=[DataRequired()])
+    target = StringField("target_node", validators=[DataRequired()])
