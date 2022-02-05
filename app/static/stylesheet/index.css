@@ -1,0 +1,65 @@
+#logout {
+    padding: 10px 20px;
+    display: inline-block;
+    border: 2px solid #d1fffc;
+    border-radius: 5px;
+    background-color: #d1fffc;
+    margin: 10px 10px 10px 100px;
+}
+
+.user_panel {
+    border: 2px solid #e5eaff;
+    border-radius: 5px;
+    background-color: #e5eaff;
+    margin: 10px;
+    margin-left: 840px;
+    height: 200px;
+    overflow: auto;
+}
+
+#query_panel {
+    text-align: center;
+    height: 70px;
+}
+
+#add_panel {
+    text-align: center;
+    height: 45px;
+}
+
+.disable_click {
+    pointer-events: none;
+}
+
+.add_node_link_panel {
+    display: none;
+    position: absolute;
+    top: 29%;
+    left: 38%;
+    width: 24%;
+    height: 42%;
+    padding: 20px;
+    border: 3px solid #99ffe0;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 2;
+    overflow: auto;
+}
+
+#mask {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(178, 174, 174, 0.3);
+    z-index: 1;
+    -moz-opacity: 0.8;
+    opacity: .80;
+    filter: alpha(opacity=88);
+}
+
+.add_panel_confirm{
+    margin-left: 20px;
+}

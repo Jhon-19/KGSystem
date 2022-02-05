@@ -1,0 +1,52 @@
+.node {
+    stroke: #84eeff;
+    stroke-width: 1.5px;
+}
+
+.node.person {
+    fill: #7e90fd;
+}
+
+.node.movie {
+    fill: #ce05ff;
+}
+
+.link {
+    stroke: #7cfa5b;
+    stroke-opacity: .6;
+    stroke-width: 5px;
+    fill: none; /*防止path的矩形背景遮盖掉底下元素*/
+}
+
+.link:hover {
+    stroke: #ff720c;
+}
+
+.link_text {
+    font-size: xx-small;
+    stroke: #3030ff;
+    stroke-opacity: .6;
+    stroke-width: 0.5px;
+}
+
+.node_text {
+    font-size: x-small;
+    stroke: #9600ff; /*修改字体颜色*/
+    stroke-opacity: .6;
+    stroke-width: 0.5px;
+}
+
+.selected {
+    fill: #e01e1e !important;
+}
+
+#graph {
+    width: 800px;
+    height: 520px;
+    margin: 10px;
+    padding: 2px;
+    background-color: #eefff8;
+    float: left;
+    border: 2px solid #eefff8;
+    border-radius: 5px;
+}
