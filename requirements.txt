@@ -2,8 +2,10 @@ alembic==1.7.5
 arrow==1.2.1
 backports.zoneinfo==0.2.1
 certifi==2021.10.8
+cffi==1.15.0
 click==8.0.3
 colorama==0.4.4
+cryptography==36.0.1
 dateparser==1.1.0
 dominate==2.6.0
 Flask==2.0.2
@@ -26,6 +28,7 @@ neo4j==4.4.1
 packaging==21.3
 pansi==2020.7.3
 py2neo==2021.2.3
+pycparser==2.21
 Pygments==2.11.2
 PyMySQL==1.0.2
 pyparsing==3.0.6
