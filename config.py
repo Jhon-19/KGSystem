@@ -17,9 +17,11 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:casia2022@127.0.0.1:3306/kgtest"
-    NEO4J_URL = "bolt://127.0.0.1:7687"
+    # NEO4J_URL = "bolt://127.0.0.1:7687"
+    NEO4J_URL = "neo4j+s://1b68a766.databases.neo4j.io"
     NEO4J_USER = "neo4j"
-    NEO4J_PASSWORD = "casia2022"
+    # NEO4J_PASSWORD = "casia2022"
+    NEO4J_PASSWORD = "FkaZST_8kFzsClpW8ES6k-kf-D4UWnz-mvja2kiXtEE"
 
 class TestingConfig(Config):
     TESTING = True
