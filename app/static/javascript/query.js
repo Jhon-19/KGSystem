@@ -46,6 +46,17 @@ function confirm_query() {
     });
 }
 
+function confirm_query_triple() {
+    document.getElementById('confirm_query_triple').addEventListener('click', () => {
+        let head = document.getElementById('query_head').value;
+        let relation = document.getElementById('query_relation').value;
+        let tail = document.getElementById('query_tail').value;
+        if (relation.length > 0) {
+            query_by_triple(head, relation, tail);
+        }
+    })
+}
+
 function query_by_node(neo_id, node_name) {
     $.ajax({
         url: '/user/query_by_node',
@@ -61,11 +72,35 @@ function query_by_node(neo_id, node_name) {
     });
 }
 
+function query_by_triple(head, relation, tail) {
+    clearRecords();
+    clearGraph();
+    const promise = clearServer();
+    promise.then(() => {
+    }).catch((err) => {
+        // console.log(err);
+    }).finally(() => {
+        $.ajax({
+            url: '/user/query_by_triple',
+            type: 'GET',
+            data: {head, relation, tail},
+            success: (result) => {
+                // console.log(result);
+                g_nodes0 = g_nodes0.concat(result.nodes);
+                g_links0 = g_links0.concat(result.links);
+
+                draw_or_update_graph();
+            }
+        })
+    })
+}
+
 function draw_or_update_graph() {
     if (is_cleared) {
         draw_graph(g_nodes0, g_links0);
     } else {
-        enter_graph(g_nodes0, g_links0);
+        clearGraph();
+        draw_graph(g_nodes0, g_links0);
     }
 
 }

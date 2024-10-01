@@ -19,22 +19,6 @@ async function show_user_link_changes() {
     show_link_changes_in_tables(link_changes_list);
 }
 
-function add_user_nodes(node_changes_list) {
-    $(node_changes_list).each((i, change) => {
-        let key = change['property'];
-        let value = change['property_value'];
-        let current_id = change['neo_link_id'];
-
-        if (current_id < 0) {
-
-        }
-    });
-}
-
-function add_user_links(link_changes_list) {
-
-}
-
 function show_link_changes_in_graph(link_changes_list) {
     $(link_changes_list).each(function (index, change) {
         let key = change['property'];

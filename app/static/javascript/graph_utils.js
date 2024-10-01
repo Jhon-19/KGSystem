@@ -146,60 +146,6 @@ async function draw_graph(g_nodes0, g_links0) {
     is_cleared = false; //将图谱未清除的标志置为false
 }
 
-async function enter_graph(g_nodes0, g_links0) {
-    await query_user_adds();
-
-    //创造副本，d3.js会修改原来的数组
-    let g_nodes = g_nodes0.concat(g_nodes0_user).map(d => Object.create(d));
-    let g_links = g_links0.concat(g_links0_user).map(d => Object.create(d));
-
-    forceSimulation.alphaTarget(0.8).restart()
-
-    init_g_nodes_links(g_nodes, g_links);
-
-    let update_links = g_root.select('#links')
-        .selectAll(".link")
-        .data(g_links);
-
-    let links = update_links.enter()
-        .append("path")
-        .merge(update_links);
-
-    let update_links_text = g_root.select('#links_text')
-        .selectAll(".link_text")
-        .data(g_links);
-
-    let links_text = update_links_text.enter()
-        .append("text")
-        .merge(update_links_text);
-
-    let update_nodes = g_root.select('#nodes')
-        .selectAll(".node")
-        .data(g_nodes);
-
-    let nodes = update_nodes.enter()
-        .append("circle")
-        .merge(update_nodes);
-
-    let update_nodes_text = g_root.select('#nodes_text')
-        .selectAll(".node_text")
-        .data(g_nodes);
-
-    let nodes_text = update_nodes_text.enter()
-        .append("text")
-        .merge(update_nodes_text);
-
-    add_attrs(links, links_text, nodes, nodes_text);
-
-    if (old_select_index >= 0) {
-        $('.node').eq(old_select_index).addClass('selected')
-    }
-
-    //加载用户更改
-    show_user_node_changes();
-    show_user_link_changes();
-}
-
 function define_arrow() {
     //定义箭头
     svg.append("svg:defs")
@@ -297,7 +243,7 @@ function clicked_node(d, i) {
 
                 add_node_link_details(properties);
 
-                show_user_node_changes();
+                // show_user_node_changes();
 
                 let node_name = '';
                 if (properties['name'] != null) {
@@ -327,24 +273,34 @@ function add_node_link_details(properties) {
 
 //清空图形
 function bind_clear_graph() {
-    $('#clear_graph').click(function () {
+    $('#clear_graph').click(clear);
+}
 
-        //重置清除标志和选择标志
-        neo_id = '';
-        is_cleared = true;
-        old_select_index = -1;
+function clear() {
+    clearRecords();
+    clearGraph();
+    clearServer().then().catch((err) => {});
+}
 
-        g_nodes0 = [];
-        g_links0 = [];
-        g_nodes0_user = [];
-        g_links0_user = [];
-        d3.selectAll('#g_root >*').remove();
+function clearRecords() {
+    //重置清除标志和选择标志
+    neo_id = '';
+    is_cleared = true;
+    old_select_index = -1;
 
-        //后端清除id
-        $.ajax({
-            url: '/user/clear_graph', type: 'GET', success: result => {
-                console.log(result)
-            }
-        })
-    });
+    g_nodes0 = [];
+    g_links0 = [];
+    g_nodes0_user = [];
+    g_links0_user = [];
+}
+
+function clearGraph() {
+    d3.selectAll('#g_root >*').remove();
+}
+
+function clearServer() {
+    //后端清除id
+    return $.ajax_pro({
+        url: '/user/clear_graph', type: 'GET'
+    })
 }

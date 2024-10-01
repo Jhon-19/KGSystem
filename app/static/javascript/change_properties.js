@@ -6,7 +6,7 @@ function enable_buttons(enable_list) {
         $('#delete_node_button'),
         $('#delete_link_button')
     ];
-    for (let index = 0; index < 3; index++) {
+    for (let index = 0; index < button_list.length; index++) {
         if (enable_list.includes(index)) {
             button_list[index].removeClass('disable_click');
             button_list[index].css('background-color', '#43fffc');

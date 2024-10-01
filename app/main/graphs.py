@@ -262,6 +262,78 @@ def query_by_node():
             return Response(query_by_user_id(neo_id),
                             mimetype='application/json')
 
+@main.route('/user/query_by_triple')
+def query_by_triple():
+    args = request.args
+    head = args.get('head', '')
+    rel = args.get('relation', '')
+    tail = args.get('tail', '')
+
+    if len(rel) == 0:
+        return Response(dumps({}), mimetype='application/json')
+
+    if len(head) != 0:
+        records = loads(query_by_node_name(head))
+        node_list = records['nodes']
+        relation_list = records['links']
+
+        head_node = None
+        for node in node_list:
+            if node['title'] == head:
+                head_node = node
+                break
+
+        if head_node is None:
+            return Response(dumps({'nodes': [], 'links': []}), mimetype='application/json')
+
+        filter_node_list = []
+        new_relation_list = []
+        for relation in relation_list:
+            if relation['Type'] != rel or relation['source'] != head_node['ID']:
+                filter_node_list.append(relation['source'])
+                filter_node_list.append(relation['target'])
+            else:
+                new_relation_list.append(relation)
+
+        new_node_list = []
+        for node in node_list:
+            if filter_node_list.count(node['ID']) == 0:
+                new_node_list.append(node)
+        new_node_list.append(head_node)
+        return Response(dumps({'nodes': new_node_list, 'links': new_relation_list}), mimetype='application/json')
+
+    elif len(tail) != 0:
+        records = loads(query_by_node_name(tail))
+        node_list = records['nodes']
+        relation_list = records['links']
+
+        tail_node = None
+        for node in node_list:
+            if node['title'] == tail:
+                tail_node = node
+                break
+
+        if tail_node is None:
+            return Response(dumps({'nodes': [], 'links': []}), mimetype='application/json')
+
+        filter_node_list = []
+        new_relation_list = []
+        for relation in relation_list:
+            if relation['Type'] != rel or relation['target'] != tail_node['ID']:
+                filter_node_list.append(relation['source'])
+                filter_node_list.append(relation['target'])
+            else:
+                new_relation_list.append(relation)
+
+        new_node_list = []
+        for node in node_list:
+            if filter_node_list.count(node['ID']) == 0:
+                new_node_list.append(node)
+        new_node_list.append(tail_node)
+
+        return Response(dumps({'nodes': new_node_list, 'links': new_relation_list}), mimetype='application/json')
+    else:
+        return Response(dumps({'nodes': [], 'links': []}), mimetype='application/json')
 
 @main.route('/user/clear_graph')
 def clear_graph():

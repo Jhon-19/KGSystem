@@ -18,10 +18,10 @@ $.extend({
                 dataType: 'json',
                 headers: params.headers || {},
                 data: params.data || {},
-                success(res) {
+                success: (res) => {
                     resolve(res);
                 },
-                error(err) {
+                error: (err) => {
                     reject(err);
                 }
             })
@@ -61,6 +61,8 @@ function init_elements() {
     confirm_change();
 
     confirm_query();
+
+    confirm_query_triple();
 
     bind_clear_graph();
 

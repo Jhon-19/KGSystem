@@ -13,13 +13,22 @@
     background-color: #e5eaff;
     margin: 10px;
     margin-left: 840px;
-    height: 200px;
+    height: 130px;
     overflow: auto;
 }
 
 #query_panel {
     text-align: center;
-    height: 70px;
+    height: 60px;
+}
+
+#query_triple_panel {
+    text-align: center;
+    height: 60px;
+}
+
+#query_head, #query_relation, #query_tail {
+    width: 80px;
 }
 
 #add_panel {

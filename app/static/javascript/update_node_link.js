@@ -141,7 +141,6 @@ function delete_node_in_graph(neo_id) {
              //d3.js为source和target添加了node中的信息，故需要访问node的ID才是原来的source的ID
             if (d.source.ID === neo_id || d.target.ID === neo_id) {
                 link_index_list.push(i);
-                return true;
             }
         });
 
@@ -167,14 +166,14 @@ function delete_node_by_index(index) {
 
 function delete_links_by_index_list(index_list) {
     let link = d3.selectAll('.link').filter((d, i) => {
-        if (index_list.includes(i)) {
+        if (index_list.indexOf(i) !== -1) {
             return true;
         }
     });
     link.style('display', 'none');
 
     let link_text = d3.selectAll('.link_text').filter((d, i) => {
-        if (index_list.includes(i)) {
+        if (index_list.indexOf(i) !== -1) {
             return true;
         }
     });
